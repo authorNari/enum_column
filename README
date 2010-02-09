@@ -1,0 +1,36 @@
+EnumColumn
+==========
+
+If you want to treat column like enum(or flag). You shuold use this plugin.
+
+
+Example
+=======
+
+Migration
+  class CreateBlogEntries < ActiveRecord::Migration
+    def self.up
+      create_table :blog_entries do |t|
+        t.string :title
+        t.text :body
+        t.integer :visibility # flag column
+      end
+    end
+  
+    def self.down
+      drop_table :blog_entries
+    end
+  end
+
+
+Model
+  class User
+    enum_column :visibility, :privated, :friend_only, :publiced
+  end
+
+How use
+  user = User.new(:visibility => User::VISIBILITIES[:privated])
+  user.visibility_privated? # => true
+  user.visibility_name      # => "privated"
+
+Copyright (c) 2009-2010 Narihiro Nakamura, released under the MIT license
