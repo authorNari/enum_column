@@ -33,4 +33,12 @@ How use
   user.visibility_privated? # => true
   user.visibility_name      # => "privated"
 
+Useful case
+  # enum_column defined hash is OrderedHash!!
+  User::VISIBILITIES.class # => ActiveSupport::OrderedHash
+
+  # So view.
+  <%= f.select :visibility, User::VISIBILITIES.map{|k,v| [k,v]} %>
+  # Ordered select options. It's very useful.
+
 Copyright (c) 2009-2010 Narihiro Nakamura, released under the MIT license
