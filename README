@@ -16,7 +16,6 @@ Migration
         t.integer :visibility # flag column
       end
     end
-  
     def self.down
       drop_table :blog_entries
     end
@@ -26,6 +25,10 @@ Migration
 Model
   class User
     enum_column :visibility, :privated, :friend_only, :publiced
+    # use alias
+    #  enum_column [:v, :visibility], :privated, :friend_only, :publiced
+    # change enum values
+    #  enum_column :visibility, {privated: 10, friend_only: 11, publiced: 12}
   end
 
 How use
@@ -41,4 +44,4 @@ Useful case
   <%= f.select :visibility, User::VISIBILITIES.map{|k,v| [k,v]} %>
   # Ordered select options. It's very useful.
 
-Copyright (c) 2009-2010 Narihiro Nakamura, released under the MIT license
+Copyright (c) 2009-2011 Narihiro Nakamura, released under the MIT license
